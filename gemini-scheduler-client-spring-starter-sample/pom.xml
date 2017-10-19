@@ -9,16 +9,16 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gemini-scheduler</artifactId>
+    <artifactId>gemini-scheduler-client-spring-starter-sample</artifactId>
     <packaging>jar</packaging>
 
-    <name>gemini-scheduler</name>
+    <name>gemini-scheduler-client-spring-starter-sample</name>
     <description>A Distributed Job Schedule Platform</description>
 
     <dependencies>
         <dependency>
             <groupId>com.sunchangpeng</groupId>
-            <artifactId>gemini-zookeeper</artifactId>
+            <artifactId>gemini-scheduler-client-spring-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--spring boot-->
@@ -29,19 +29,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!--quartz-->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
         </dependency>
         <!--test-->
         <dependency>

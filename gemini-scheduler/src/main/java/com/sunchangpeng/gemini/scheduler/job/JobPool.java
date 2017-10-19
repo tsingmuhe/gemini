@@ -19,6 +19,8 @@ public class JobPool {
 
     @Autowired
     private Scheduler scheduler;
+    @Autowired
+    private ZkJobContext zkJobContext;
 
     public void scheduleJob(JobBean jobBean) throws SchedulerException {
         JobDetail quartzJob = newJob(JobAgent.class)
@@ -43,6 +45,9 @@ public class JobPool {
 
         this.scheduler.scheduleJob(quartzJob, trigger);
         LOGGER.info("schedule job {}", jobBean);
+
+        zkJobContext.addZkJobInstance(jobBean);
+        LOGGER.info("add Zk Job Instance {}", jobBean);
     }
 
     private JobDataMap buildJobData(JobBean jobBean) {
