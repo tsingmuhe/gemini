@@ -1,17 +1,12 @@
 package com.sunchangpeng.gemini.scheduler.client.autoconfigure;
 
-import com.sunchangpeng.gemini.common.utils.CollectionUtil;
-import com.sunchangpeng.gemini.scheduler.client.Job;
-import com.sunchangpeng.gemini.scheduler.client.SchedulerClient;
 import com.sunchangpeng.gemini.scheduler.client.config.SchedulerClientConfig;
-import com.sunchangpeng.gemini.zookeeper.ZkWatchers;
+import com.sunchangpeng.gemini.scheduler.client.spring.SpringSchedulerClient;
+import com.sunchangpeng.gemini.zookeeper.ZkTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Map;
 
 /**
  * Created by sunchangpeng
@@ -20,11 +15,7 @@ import java.util.Map;
 @EnableConfigurationProperties(SchedulerClientProperties.class)
 public class SchedulerClientAutoConfiguration {
     @Autowired
-    private ApplicationContext springContext;
-    @Autowired
     private SchedulerClientProperties properties;
-    @Autowired
-    private ZkWatchers zkWatchers;
 
     @Bean
     public SchedulerClientConfig schedulerClientConfig() {
@@ -35,19 +26,8 @@ public class SchedulerClientAutoConfiguration {
     }
 
     @Bean
-    public SchedulerClient schedulerClient() {
-        SchedulerClient bean = new SchedulerClient(zkWatchers, schedulerClientConfig());
-        registerJobs(bean);
+    public SpringSchedulerClient springSchedulerClient(SchedulerClientConfig clientConfig, ZkTemplate zkTemplate) throws Exception {
+        SpringSchedulerClient bean = new SpringSchedulerClient(clientConfig, zkTemplate);
         return bean;
-    }
-
-    private void registerJobs(SchedulerClient client) {
-        // register default jobs
-        Map<String, Job> jobs = springContext.getBeansOfType(Job.class);
-        if (!CollectionUtil.isNullOrEmpty(jobs)) {
-            for (Job job : jobs.values()) {
-                client.registerJob(job);
-            }
-        }
     }
 }

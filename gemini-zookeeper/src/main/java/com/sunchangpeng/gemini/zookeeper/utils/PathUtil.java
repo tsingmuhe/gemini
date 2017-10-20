@@ -4,7 +4,7 @@ package com.sunchangpeng.gemini.zookeeper.utils;
 /**
  * Created by sunchangpeng
  */
-public abstract class ZkPathUtil {
+public abstract class PathUtil {
     public static String format(String... parts) {
         StringBuilder key = new StringBuilder();
         for (String part : parts) {

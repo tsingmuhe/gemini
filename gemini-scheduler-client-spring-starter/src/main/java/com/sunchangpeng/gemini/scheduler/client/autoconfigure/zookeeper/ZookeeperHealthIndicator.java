@@ -1,4 +1,4 @@
-package com.sunchangpeng.gemini.zookeeper.configure;
+package com.sunchangpeng.gemini.scheduler.client.autoconfigure.zookeeper;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.imps.CuratorFrameworkState;

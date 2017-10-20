@@ -1,12 +1,11 @@
 package com.sunchangpeng.gemini.zookeeper;
 
 import com.alibaba.fastjson.JSON;
-import com.sunchangpeng.gemini.common.utils.StringUtil;
+import com.sunchangpeng.gemini.zookeeper.utils.StringUtil;
+import com.sunchangpeng.gemini.zookeeper.watcher.*;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,10 +13,12 @@ import java.util.List;
 /**
  * Created by sunchangpeng
  */
-@Component
-public class ZkClient {
-    @Autowired
+public class ZkTemplate {
     private CuratorFramework curator;
+
+    public ZkTemplate(CuratorFramework curator) {
+        this.curator = curator;
+    }
 
     public String create(String path, byte[] data) {
         try {
@@ -188,5 +189,17 @@ public class ZkClient {
         } catch (Exception e) {
             throw new ZkException(e);
         }
+    }
+
+    public TreeWatcher createTreeWatcher(String path, TreeListener listener) {
+        return TreeWatcher.buildAndWatch(curator, path, listener);
+    }
+
+    public NodeWatcher createNodeWatcher(String path, NodeListener listener) {
+        return NodeWatcher.buildAndWatch(curator, path, listener);
+    }
+
+    public ChildWatcher createChildWatcher(String path, boolean cacheData, ChildListener listener) {
+        return ChildWatcher.buildAndWatch(curator, path, cacheData, listener);
     }
 }

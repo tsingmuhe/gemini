@@ -13,17 +13,18 @@ public class ZkJobRunner implements ChildListener {
     /**
      * The job implements
      */
+    private JobExecutor jobExecutor;
     private Job job;
 
-    public ZkJobRunner(Job job) {
+    public ZkJobRunner(JobExecutor jobExecutor, Job job) {
+        this.jobExecutor = jobExecutor;
         this.job = job;
     }
 
     @Override
     public void onAdd(String path, String data) {
         LOGGER.info("onAdd {}", path);
-        JobContext jobContext = new JobContext();
-        job.execute(jobContext);
+        jobExecutor.execute(1L, job);
     }
 
     @Override

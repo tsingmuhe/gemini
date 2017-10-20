@@ -14,6 +14,7 @@
     <modules>
         <module>gemini-scheduler</module>
 		<module>gemini-scheduler-client</module>
+		<module>gemini-scheduler-client-spring</module>
 		<module>gemini-scheduler-client-spring-starter</module>
         <module>gemini-zookeeper</module>
 		<module>gemini-common</module>

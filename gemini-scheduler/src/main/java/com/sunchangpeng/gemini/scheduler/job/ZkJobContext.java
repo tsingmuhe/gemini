@@ -1,9 +1,8 @@
 package com.sunchangpeng.gemini.scheduler.job;
 
+import com.sunchangpeng.gemini.common.ZkPaths;
 import com.sunchangpeng.gemini.common.utils.CollectionUtil;
-import com.sunchangpeng.gemini.zookeeper.ZkClient;
-import com.sunchangpeng.gemini.zookeeper.ZkPaths;
-import com.sunchangpeng.gemini.zookeeper.ZkWatchers;
+import com.sunchangpeng.gemini.zookeeper.ZkTemplate;
 import com.sunchangpeng.gemini.zookeeper.watcher.NodeListener;
 import com.sunchangpeng.gemini.zookeeper.watcher.NodeWatcher;
 import org.slf4j.Logger;
@@ -24,9 +23,8 @@ public class ZkJobContext {
     private static final Logger LOGGER = LoggerFactory.getLogger(ZkJobContext.class);
 
     @Autowired
-    private ZkClient zkClient;
-    @Autowired
-    private ZkWatchers zkWatchers;
+    private ZkTemplate zkClient;
+
 
     public void addZkJobInstance(JobBean jobBean) {
         String appName = jobBean.getAppName();
@@ -80,7 +78,7 @@ public class ZkJobContext {
 
         String jobInstanceNode = ZkPaths.pathOfJobInstance(appName, jobClass, jobInstanceId);
 
-        NodeWatcher watcher = zkWatchers.createNodeWatcher(jobInstanceNode, new NodeListener() {
+        NodeWatcher watcher = zkClient.createNodeWatcher(jobInstanceNode, new NodeListener() {
             @Override
             public void onUpdate(String newData) {
 

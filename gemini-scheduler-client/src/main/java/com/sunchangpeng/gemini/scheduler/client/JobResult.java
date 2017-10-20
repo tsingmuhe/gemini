@@ -16,9 +16,6 @@ public class JobResult {
 
     public static final JobResult RETRY = new JobResult(2);
 
-    /**
-     * The shard will be back to server, and pulled by other clients
-     */
     public static final JobResult LATER = new JobResult(3);
 
     private int code;

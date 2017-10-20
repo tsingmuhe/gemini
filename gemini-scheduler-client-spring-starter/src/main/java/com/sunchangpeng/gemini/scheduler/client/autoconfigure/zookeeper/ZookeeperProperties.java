@@ -1,4 +1,4 @@
-package com.sunchangpeng.gemini.zookeeper.configure;
+package com.sunchangpeng.gemini.scheduler.client.autoconfigure.zookeeper;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,6 +1,6 @@
+package com.sunchangpeng.gemini.scheduler.configuration.zookeeper;
 
-package com.sunchangpeng.gemini.zookeeper.configure;
-
+import com.sunchangpeng.gemini.zookeeper.ZkTemplate;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -42,6 +42,12 @@ public class ZookeeperAutoConfiguration {
         LOGGER.info("connected to zookeeper");
 
         return curator;
+    }
+
+    @Bean
+    public ZkTemplate zkTemplate(CuratorFramework curator) {
+        ZkTemplate bean = new ZkTemplate(curator);
+        return bean;
     }
 
     @Bean

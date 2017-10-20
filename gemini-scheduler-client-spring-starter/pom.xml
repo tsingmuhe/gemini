@@ -18,12 +18,16 @@
     <dependencies>
         <dependency>
             <groupId>com.sunchangpeng</groupId>
-            <artifactId>gemini-scheduler-client</artifactId>
+            <artifactId>gemini-scheduler-client-spring</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -1,8 +1,8 @@
 package com.sunchangpeng.gemini.zookeeper.watcher;
 
-import com.sunchangpeng.gemini.common.utils.StringUtil;
 import com.sunchangpeng.gemini.zookeeper.Watcher;
 import com.sunchangpeng.gemini.zookeeper.ZkException;
+import com.sunchangpeng.gemini.zookeeper.utils.StringUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.TreeCache;
@@ -34,7 +34,7 @@ public class TreeWatcher implements Watcher, TreeCacheListener {
 
     public void watch() {
         if (this.listener == null) {
-            throw new ZkException("TreeListener for path {} is required; it must not be null", path);
+            throw new ZkException("TreeListener for path " + this.path + " is required; it must not be null");
         }
 
         try {
@@ -44,7 +44,7 @@ public class TreeWatcher implements Watcher, TreeCacheListener {
 
             this.treeCache = cache;
         } catch (Exception e) {
-            throw new ZkException(e, "Error initializing TreeWatcher for path {}", this.path);
+            throw new ZkException("Error initializing TreeWatcher for path " + this.path, e);
         }
     }
 

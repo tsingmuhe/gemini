@@ -1,8 +1,8 @@
 package com.sunchangpeng.gemini.zookeeper.watcher;
 
-import com.sunchangpeng.gemini.common.utils.StringUtil;
 import com.sunchangpeng.gemini.zookeeper.Watcher;
 import com.sunchangpeng.gemini.zookeeper.ZkException;
+import com.sunchangpeng.gemini.zookeeper.utils.StringUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.NodeCache;
@@ -31,17 +31,17 @@ public class NodeWatcher implements Watcher, NodeCacheListener {
 
     public void watch() {
         if (this.listener == null) {
-            throw new ZkException("NodeListener for path {} is required; it must not be null", path);
+            throw new ZkException("NodeListener for path " + this.path + " is required; it must not be null");
         }
 
         try {
-            NodeCache cache = new NodeCache(curator, path);
+            NodeCache cache = new NodeCache(this.curator, this.path);
             cache.getListenable().addListener(this);
             cache.start(true);
 
             this.nodeCache = cache;
         } catch (Exception e) {
-            throw new ZkException(e, "Error initializing NodeWatcher for path {}", this.path);
+            throw new ZkException("Error initializing NodeWatcher for path " + this.path, e);
         }
     }
 

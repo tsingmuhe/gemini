@@ -1,7 +1,6 @@
 package com.sunchangpeng.gemini.scheduler.job;
 
-import com.sunchangpeng.gemini.zookeeper.ZkClient;
-import com.sunchangpeng.gemini.zookeeper.ZkPaths;
+import com.sunchangpeng.gemini.zookeeper.ZkTemplate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class ZkJobContextTestSpring {
     @Autowired
     private ZkJobContext zkJobContext;
     @Autowired
-    private ZkClient zkClient;
+    private ZkTemplate zkClient;
 
     @Test
     public void addZkJobInstance() throws InterruptedException {
